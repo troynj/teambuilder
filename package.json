@@ -4,20 +4,23 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --verbose"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/troynj/teambuilder.git"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Troy Johnson",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/troynj/teambuilder/issues"
   },
   "homepage": "https://github.com/troynj/teambuilder#readme",
   "dependencies": {
     "inquirer": "^8.2.4"
+  },
+  "devDepenencies": {
+  "jest": "^29.4.0"
   }
 }

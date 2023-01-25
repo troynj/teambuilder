@@ -1,12 +1,13 @@
 const fs = require("fs");
 const inquirer = require("inquirer");
 // const Employee = require("./lib/employee.js");
-const Manager = require("./lib/manager.js");
-const Engineer = require("./lib/engineer.js");
-const Intern = require("./lib/intern.js");
-const genBeg = require("./src/beginning.js");
-const generateCard = require("./src/markdown.js");
+const Manager = require("./lib/manager");
+const Engineer = require("./lib/engineer");
+const Intern = require("./lib/intern");
+const genBeg = require("./src/beginning");
+const generateCard = require("./src/card-template");
 const genEnd = require("./src/end");
+const teamArr = []
 
 async function mainMenu() {
   let finish = false;
@@ -21,44 +22,51 @@ async function mainMenu() {
         },
       ])
       .then(async ({ action }) => {
-        action === "Finish" ? (finish = true) : await addEmployee(action);
+        switch(action) {
+          case "Finish": finish = true
+          break;
+          case "Engineer": await addEmployee(action, "github")
+          break;
+          case "Intern": await addEmployee(action, "school");
+          break;
+        }
       });
   } while (finish === false);
 }
 
-async function addEmployee(type) {
+async function addEmployee(type, p_detail) {
   await inquirer
     .prompt([
       {
         name: "name",
-        message: `Enter the team ${type}'s name: `,
+        message: `Enter the ${type}'s name: `,
       },
       {
         name: "id",
-        message: `Enter the team ${type}'s employee ID: `,
+        message: `Enter the ${type}'s employee ID: `,
       },
       {
         name: "email",
-        message: `Enter the team ${type}'s email address: `,
+        message: `Enter the ${type}'s email address: `,
       },
       {
         name: "detail",
-        message: `Enter the team ${type}'s office number: `,
+        message: `Enter the ${type}'s ${p_detail}: `,
       },
     ])
     .then(({ name, id, email, detail }) => {
       switch (type) {
         case "Manager":
           const man = new Manager(name, id, email, detail);
-          appToFile(man);
+          teamArr.push(man)
           break;
         case "Engineer":
           const eng = new Engineer(name, id, email, detail);
-          appToFile(eng);
+          teamArr.push(eng)
           break;
         case "Intern":
           const int = new Intern(name, id, email, detail);
-          appToFile(int);
+          teamArr.push(int)
           break;
         default:
           console.log("no conditions met");
@@ -66,7 +74,7 @@ async function addEmployee(type) {
     });
 }
 
-function appToFile(data) {
+async function appToFile(data) {
   fs.appendFile(
     "dist/index.html",
     generateCard(data),
@@ -76,9 +84,17 @@ function appToFile(data) {
 
 async function init() {
   fs.writeFile("dist/index.html", genBeg(), (err) => err && console.log(err));
-  await addEmployee("Manager");
+  await addEmployee("Manager", "office number");
   await mainMenu();
+  // teamArr.forEach(el => appToFile(el))
+  console.log(teamArr)
+  await appToFile(teamArr[0])
+  await appToFile(teamArr[1])
+  await appToFile(teamArr[2])
+  await appToFile(teamArr[3])
+  await appToFile(teamArr[4])
   fs.appendFile("dist/index.html", genEnd(), (err) => err && console.log(err));
+  console.log("fin")
 }
 
 init();
