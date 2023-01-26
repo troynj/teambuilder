@@ -75,15 +75,13 @@ async function addEmployee(type, p_detail) {
 }
 
 async function appToFile(data) {
-  fs.appendFile(
+  fs.appendFileSync(
     "dist/index.html",
-    generateCard(data),
-    (err) => err && console.log(err)
-  );
+    generateCard(data));
 }
 
 async function init() {
-  fs.writeFile("dist/index.html", genBeg(), (err) => err && console.log(err));
+  fs.writeFileSync("dist/index.html", genBeg(), (err) => err && console.log(err));
   await addEmployee("Manager", "office number");
   await mainMenu();
   // teamArr.forEach(el => appToFile(el))
@@ -93,7 +91,7 @@ async function init() {
   await appToFile(teamArr[2])
   await appToFile(teamArr[3])
   await appToFile(teamArr[4])
-  fs.appendFile("dist/index.html", genEnd(), (err) => err && console.log(err));
+  fs.appendFileSync("dist/index.html", genEnd(), (err) => err && console.log(err));
   console.log("fin")
 }
 
