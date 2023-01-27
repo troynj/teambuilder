@@ -15,7 +15,7 @@ function setDetail(data) {
     return`<div class="detail">Office Number: ${data.officeNumber}</div>`
   }
   else if(data.github) {
-    return`<div class="detail">GitHub: ${data.github}</div>`
+    return`<div class="detail">GitHub:<a target=”_blank” href="https://github.com/${data.github}"> ${data.github}</a></div>`
   }
   else if(data.school) {
     return`<div class="detail">School: ${data.school}</div>`
@@ -34,7 +34,7 @@ function generateCard(data) {
         </section>
         <section class="info">
           <div class="id">ID: ${data.id}</div>
-          <div class="email">Email: <a href="" class="link">${data.email}</a></div>
+          <div class="email">Email: <a href="mailto:${data.email}" class="link">${data.email}</a></div>
           ${detail}
         </section>
       </article>`
