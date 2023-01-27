@@ -57,15 +57,15 @@ async function addEmployee(type, p_detail) {
     .then(({ name, id, email, detail }) => {
       switch (type) {
         case "Manager":
-          const man = new Manager(name, id, email, detail);
+          const man = new Manager(name, Number(id), email, Number(detail));
           teamArr.push(man)
           break;
         case "Engineer":
-          const eng = new Engineer(name, id, email, detail);
+          const eng = new Engineer(name, Number(id), email, detail);
           teamArr.push(eng)
           break;
         case "Intern":
-          const int = new Intern(name, id, email, detail);
+          const int = new Intern(name, Number(id), email, detail);
           teamArr.push(int)
           break;
         default:
@@ -84,15 +84,9 @@ async function init() {
   fs.writeFileSync("dist/index.html", genBeg(), (err) => err && console.log(err));
   await addEmployee("Manager", "office number");
   await mainMenu();
-  // teamArr.forEach(el => appToFile(el))
-  console.log(teamArr)
-  await appToFile(teamArr[0])
-  await appToFile(teamArr[1])
-  await appToFile(teamArr[2])
-  await appToFile(teamArr[3])
-  await appToFile(teamArr[4])
+  teamArr.forEach(el => appToFile(el))
   fs.appendFileSync("dist/index.html", genEnd(), (err) => err && console.log(err));
-  console.log("fin")
+  // console.log("fin")
 }
 
 init();
