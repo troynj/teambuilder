@@ -1,6 +1,3 @@
-// const Manager = require("./lib/manager.js");
-// const Engineer = require("./lib/engineer.js");
-// const Intern = require("./lib/intern.js");
 function setRole(role) {
  
   if (role === "Manager") return `<i class="fas fa-mug-hot"></i> Manager`
