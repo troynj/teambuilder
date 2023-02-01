@@ -11,7 +11,7 @@
 8. [License](#license)
 
 [Deployed site](./assets/teambuilderSS.png)<br>
-[Walkthrough Video](https://drive.google.com/file/d/1jP0fCTgIGIEDgDLMyPSrKyIro03mp-YZ/view)
+[Walk Through Video](https://drive.google.com/file/d/1jP0fCTgIGIEDgDLMyPSrKyIro03mp-YZ/view)
 
 # **Description**
 Answer questions about yourself and your team to easily organize their 
